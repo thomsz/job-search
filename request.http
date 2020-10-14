@@ -1,0 +1,2 @@
+GET https://staging-api.joblocal.de/v4/search-jobs?search.query=ronald
+
