@@ -1,12 +1,21 @@
 import React from "react";
 import { Collapse, Result } from "antd";
 
-const Results = ({ searchResults }) => {
-  console.log("Results -> searchResults", searchResults.data.included);
 const { Panel } = Collapse;
+
+const Results = ({ searchResults, search }) => {
+  if (!searchResults.data.included)
+    return (
+      <Result
+        status="404"
+        title="No jobs around!"
+        subTitle={`Sorry, we couldn't find you any jobs under ${search}`}
+      />
+    );
 
   const results = searchResults.data.included.map(({ id, attributes }) => {
     const job = attributes;
+
     return (
       <Panel header={`${job.company.name}: ${job.title} (${job.location.city})`} key={id}>
         <img style={{ float: "right" }} src={job.company.logo} alt={job.company.name} />
