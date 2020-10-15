@@ -1,4 +1,5 @@
 import React from "react";
+import { Input } from "antd";
 
 const SearchField = ({ input, setInput, submitQuery }) => {
   const onChangeHandler = (event) => {
@@ -11,7 +12,15 @@ const SearchField = ({ input, setInput, submitQuery }) => {
     }
   };
 
-  return <input value={input} onChange={onChangeHandler} onKeyDown={onKeyDownHandler} />;
+  return (
+    <Input
+      placeholder="Search job"
+      style={{ width: "200px" }}
+      value={input}
+      onChange={onChangeHandler}
+      onKeyDown={onKeyDownHandler}
+    />
+  );
 };
 
 export default SearchField;
