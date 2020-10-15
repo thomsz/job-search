@@ -5,7 +5,7 @@ import Results from "./Results/Results";
 import SearchField from "./SearchField/SearchField";
 
 axios.defaults.baseURL =
-  process.env.REACT_APP_API_URL || "https://staging-api.joblocal.de/v4/search-jobs/";
+  process.env.REACT_APP_API_URI || "https://staging-api.joblocal.de/v4/search-jobs/";
 
 const Search = () => {
   const [{ input }, setInput] = useState({ input: "" });
