@@ -15,7 +15,7 @@ const Results = ({ searchResults, search }) => {
 
   const results = searchResults.data.included.map(({ id, attributes }) => {
     const job = attributes;
-    console.log("benefits", job);
+
     return (
       <Panel
         header={`${job.company.name}: ${job.title} / ${job.workingTimes[0].title} (${job.location.city})`}
@@ -25,11 +25,24 @@ const Results = ({ searchResults, search }) => {
         <br />
         <h3>{`${job.company.name}: ${job.title}`}</h3>
         <p>{job.previewText}</p>
-        <br />
+        {job.responsibilities !== "" && (
+          <>
+            <h3>Verantwortung</h3>
+            <p>{job.responsibilities}</p>
+          </>
+        )}
         {job.requirements !== "" && (
           <>
             <h3>Anforderungen</h3>
             <p>{job.requirements}</p>
+          </>
+        )}
+        {job.qualifications.length > 0 && (
+          <>
+            <h3>Qualifikationen</h3>
+            {job.qualifications.map((qualification) => (
+              <h4 key={qualification.id}>- {qualification.title}</h4>
+            ))}
           </>
         )}
         <br />
