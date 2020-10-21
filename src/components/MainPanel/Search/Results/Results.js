@@ -16,6 +16,7 @@ const Results = ({ searchResults, search }) => {
 
   const results = searchResults.data.included.map(({ id, attributes }) => {
     const job = attributes;
+    console.log("test", job);
     if (job === undefined) return notFound;
 
     return (
