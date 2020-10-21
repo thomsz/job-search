@@ -4,17 +4,19 @@ import { Collapse, Result } from "antd";
 const { Panel } = Collapse;
 
 const Results = ({ searchResults, search }) => {
-  if (!searchResults.data.included)
-    return (
-      <Result
-        status="404"
-        title="No jobs around!"
-        subTitle={`Sorry, we couldn't find you any jobs under ${search}`}
-      />
-    );
+  const notFound = (
+    <Result
+      status="404"
+      title="No jobs around!"
+      subTitle={`Sorry, we couldn't find you any jobs under ${search}`}
+    />
+  );
+
+  if (!searchResults.data.included) return notFound;
 
   const results = searchResults.data.included.map(({ id, attributes }) => {
     const job = attributes;
+    if (job === undefined) return notFound;
 
     return (
       <Panel
