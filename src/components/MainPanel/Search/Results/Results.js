@@ -15,13 +15,15 @@ const Results = ({ searchResults, search }) => {
   if (!searchResults.data.included) return notFound;
 
   const results = searchResults.data.included.map(({ id, attributes }) => {
+    if (attributes === undefined) return notFound;
+
     const job = attributes;
-    console.log("test", job);
-    if (job === undefined) return notFound;
+    let workingTimes = "";
+    if (job.workingTimes.length > 0) workingTimes = job.workingTimes[0].title;
 
     return (
       <Panel
-        header={`${job.company.name}: ${job.title} / ${job.workingTimes[0].title} (${job.location.city})`}
+        header={`${job.company.name}: ${job.title} / ${workingTimes} (${job.location.city})`}
         key={id}>
         <img style={{ float: "right" }} src={job.company.logo} alt={job.company.name} />
         <p>{job.location.city}</p>
